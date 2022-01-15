@@ -5,14 +5,12 @@ import com.nankiewic.libraryappbackend.dto.auth.AuthResponse;
 import com.nankiewic.libraryappbackend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
 
     private final AuthService authService;
@@ -25,6 +23,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody AuthRequest authRequest) {
         authService.register(authRequest);
-        return ResponseEntity.ok("registration completed successfully");
+        return ResponseEntity.ok().build();
     }
 }

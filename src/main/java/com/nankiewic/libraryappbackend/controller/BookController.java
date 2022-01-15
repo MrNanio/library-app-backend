@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/books")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
 
     private final BookService bookService;
@@ -29,7 +30,7 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody BookDTO bookDTO) {
-        return new ResponseEntity<>(bookService.addBook(bookDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(bookService.addBook(bookDTO), HttpStatus.OK);
     }
 
     @PutMapping
