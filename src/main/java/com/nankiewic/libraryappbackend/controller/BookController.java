@@ -1,6 +1,7 @@
 package com.nankiewic.libraryappbackend.controller;
 
 import com.nankiewic.libraryappbackend.dto.BookDTO;
+import com.nankiewic.libraryappbackend.dto.BookSimpleDTO;
 import com.nankiewic.libraryappbackend.model.Book;
 import com.nankiewic.libraryappbackend.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +31,12 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody BookDTO bookDTO) {
-        return new ResponseEntity<>(bookService.addBook(bookDTO), HttpStatus.OK);
+    public ResponseEntity<Book> addBook(@RequestBody @Valid BookSimpleDTO bookSimpleDTO) {
+        return new ResponseEntity<>(bookService.addBook(bookSimpleDTO), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<Book> updateBook(@RequestBody BookDTO bookDTO) {
+    public ResponseEntity<Book> updateBook(@RequestBody @Valid BookDTO bookDTO) {
         return new ResponseEntity<>(bookService.updateBook(bookDTO), HttpStatus.OK);
     }
 

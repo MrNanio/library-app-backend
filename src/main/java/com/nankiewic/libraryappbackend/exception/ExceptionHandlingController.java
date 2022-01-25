@@ -1,9 +1,11 @@
 package com.nankiewic.libraryappbackend.exception;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -59,5 +61,14 @@ public class ExceptionHandlingController extends ResponseEntityExceptionHandler 
                 exception.getMessage(),
                 request.getDescription(true));
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ExceptionResponse response = new ExceptionResponse(
+                LocalDateTime.now(),
+                "Błąd podczas walidacji",
+                request.getDescription(true));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 }
