@@ -6,6 +6,7 @@ import com.nankiewic.libraryappbackend.exception.PermissionDeniedException;
 import com.nankiewic.libraryappbackend.mapper.BookMapper;
 import com.nankiewic.libraryappbackend.model.Book;
 import com.nankiewic.libraryappbackend.model.User;
+import com.nankiewic.libraryappbackend.model.View.BookBasicView;
 import com.nankiewic.libraryappbackend.repository.BookRepository;
 import com.nankiewic.libraryappbackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class BookService {
         return bookRepository.findAllByUser(auth.getName());
     }
 
-    public BookDTO getBookById(Long id) {
+    public BookBasicView getBookById(Long id) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return bookRepository.findByBookIdAndUserEmail(id, auth.getName()).orElseThrow(
                 () -> new EntityNotFoundException("resources not found"));

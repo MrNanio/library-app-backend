@@ -3,6 +3,7 @@ package com.nankiewic.libraryappbackend.controller;
 import com.nankiewic.libraryappbackend.dto.BookDTO;
 import com.nankiewic.libraryappbackend.dto.BookSimpleDTO;
 import com.nankiewic.libraryappbackend.model.Book;
+import com.nankiewic.libraryappbackend.model.View.BookBasicView;
 import com.nankiewic.libraryappbackend.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BookDTO> getBookById(@PathVariable("id") Long id) {
+    public ResponseEntity<BookBasicView> getBookById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
     }
 

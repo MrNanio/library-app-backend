@@ -15,13 +15,19 @@ import java.time.LocalDateTime;
 public class BookDTO {
 
     private Long id;
+
     @NotBlank
     private String title;
+
     @NotBlank
     private String author;
+
     @NotBlank
     private String category;
+
     private LocalDateTime addDate;
+
     @NotBlank
     private String publishYear;
+
 }
